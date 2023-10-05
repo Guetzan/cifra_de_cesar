@@ -67,13 +67,17 @@ def bruteforce(texto, funcao_descriptografar):
             quantidades_de_shift += 5 
 
 #função para desenhar o menu e evitar a repetição de código
-def desenhar_menu():
+def menu():
     #menu de início
     print('--------------------------------------------')
     print('---------------Cifra de César---------------')
     print(' [1] - Criptografar   [2] - Descriptografar\n')
     print(' [3] - Bruteforce     [4] - Sair            ')
     print('--------------------------------------------')
+    print('Digite o número de acordo com sua escolha:')
+    opcao_escolhida = int(input('Sua escolha: '))
+
+    return opcao_escolhida
 
 def testar_tamanho_string(texto):
     #while que impossibiltia o usuário de passar uma string que excede o limite de 128 caracteres
@@ -83,9 +87,7 @@ def testar_tamanho_string(texto):
 
     return texto
 
-desenhar_menu()
-print('Digite o número de acordo com sua escolha:')
-escolha_menu = int(input('Sua escolha: '))
+escolha_menu = menu()
 
 #um while para que o usuário possa repetir quantas operações quiser até o mesmo decidir que deseja parar
 while escolha_menu != 4:
@@ -123,8 +125,6 @@ while escolha_menu != 4:
 
         bruteforce(texto_criptografado, descriptografar)
 
-    desenhar_menu()
-    print('O que deseja fazer em seguida:')
-    escolha_menu = int(input('Sua escolha: '))
+    escolha_menu = menu()
 
 print('\nObrigado por utilizar!\n')
