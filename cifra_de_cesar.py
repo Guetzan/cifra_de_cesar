@@ -11,7 +11,7 @@ def criptografar(texto, shift):
         #cria a string com o texto criptografado, concatenando o caractere atual na variavel texto_criptografado a cada iteração do for
         if ord(caractere) >= 32 and ord(caractere) <= 126:
             if caractere_com_shift > 126:
-                #caso o caractere com shift ultrapasse o limite de 126, ele será subtraido para ser substituido por um caractere dentro dos limites
+                #caso o caractere com shift ultrapasse o limite de 126, ele será subtraido para ser substituido por um caractere dentro dos limites,
                 #concatenando-o logo em seguida a variável texto_criptografado
                 texto_criptografado += chr(caractere_com_shift - 95)
             else:
