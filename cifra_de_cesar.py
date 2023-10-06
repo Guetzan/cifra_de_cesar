@@ -108,14 +108,14 @@ def mostrar_historico():
     print('\n\n-----Histórico de operações:')
     for operacao in operacoes:
         print('-------------------------------------------------------------')
-        print(f" Texto de origem: {operacoes[operacao]['texto_origem']}")
-        print(f"Texto resultante: {operacoes[operacao]['texto_final']}")
-        print(f"Metodo utilizado: {operacoes[operacao]['metodo_utilizado']}")
+        print(f"  Texto de origem: {operacoes[operacao]['texto_origem']}")
+        print(f" Texto resultante: {operacoes[operacao]['texto_final']}")
+        print(f" Metodo utilizado: {operacoes[operacao]['metodo_utilizado']}")
 
         if(operacoes[operacao]['metodo_utilizado'] == 'bruteforce'):
-            print(f"Shifts utilizado: {operacoes[operacao]['shift_utilizado']}")
+            print(f"Shifts utilizados: {operacoes[operacao]['shift_utilizado']}")
         else:
-            print(f" Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
+            print(f"Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
         print('-------------------------------------------------------------\n')
 
 escolha_menu = menu()
