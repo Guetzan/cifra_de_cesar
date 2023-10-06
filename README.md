@@ -12,4 +12,4 @@ Todos os caracteres são substituídos dentro de seus respectivos "grupos". Isso
 
 No exemplo acima, o caractere “ÿ” está sendo deslocado 5 posições à frente. No entanto, como ele é o último em seu grupo, em vez de ser substituído pelo quinto elemento do grupo "Latino Básico", o algoritmo desenvolvido fará com que ele seja substituído pelo quinto elemento dentro de seu próprio grupo, que, nesse caso, é o caractere “¤” com endereço 164.
 
-Esta implementação da Cifra de César é um pouco mais segura, porém continua sendo obsoleta nos dias atuais, podendo ser decifrada em questão de segundos através de brute force. Desenvolvida apenas por motivos de estudo para um trabalho acadêmico envolvendo criptografia.
+Esta implementação da Cifra de César é um pouco mais segura, porém continua sendo obsoleta nos dias atuais, podendo ser decifrada em questão de segundos através de brute force, ou manualmente em poucos minutos. Desenvolvida apenas por motivos de estudo para um trabalho acadêmico envolvendo criptografia.
