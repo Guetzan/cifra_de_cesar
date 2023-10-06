@@ -1,3 +1,5 @@
+operacoes = {}
+
 def criptografar(texto, shift):
     texto_criptografado = ''
 
@@ -21,14 +23,15 @@ def criptografar(texto, shift):
             else:
                 texto_criptografado += chr(caractere_com_shift)
     
+    registrar_operacao(texto, texto_criptografado, 'criptografia', shift)
+    
     return texto_criptografado
 
-def descriptografar(texto, shift):
+def descriptografar(texto, shift, bruteforcing):
     texto_descriptografado = ''
-    
+
     for caractere in texto:
         caractere_sem_shift = ord(caractere) - shift #faz um shift no caractere atual
-        
         #descriptografa todos os caracteres com edereço de 32 a 126 na tabela UNICODE
         if ord(caractere) >= 32 and ord(caractere) <= 126:
             if caractere_sem_shift < 32:
@@ -42,6 +45,10 @@ def descriptografar(texto, shift):
                 texto_descriptografado += chr(caractere_sem_shift + 95)
             else:
                 texto_descriptografado += chr(caractere_sem_shift)
+        
+    if not bruteforcing:
+        registrar_operacao(texto, texto_descriptografado, 'descriptografia', shift)
+
 
     return texto_descriptografado
 
@@ -53,7 +60,7 @@ def bruteforce(texto, funcao_descriptografar):
 
     while bruteforcing:
         for shift_atual in range(shift_inicial, quantidades_de_shift):
-            texto_criptografado = descriptografar(texto, shift_atual)
+            texto_criptografado = descriptografar(texto, shift_atual, True)
             print(f'Resultado com shift de {shift_atual}:\n{texto_criptografado}\n')
 
         print('Deseja continuar o bruteforce?')
@@ -65,11 +72,13 @@ def bruteforce(texto, funcao_descriptografar):
         else:
             shift_inicial += 5
             quantidades_de_shift += 5 
+    
+    registrar_operacao(texto, '-------', 'bruteforce', quantidades_de_shift-1)
 
 #função para desenhar o menu e evitar a repetição de código
 def menu():
     #menu de início
-    print('--------------------------------------------')
+    print('\n--------------------------------------------')
     print('---------------Cifra de César---------------')
     print(' [1] - Criptografar   [2] - Descriptografar\n')
     print(' [3] - Bruteforce     [4] - Sair            ')
@@ -85,7 +94,29 @@ def testar_tamanho_string(texto):
         print(f'O tamanho da string ultrapassou em {len(texto) - 128} caracteres o limite de 128. Tente novamente. ')
         texto = input('Nova string: ')
 
-    return texto
+    return texto 
+    
+def registrar_operacao(texto_origem, texto_final, tipo, shift):
+    operacoes[len(operacoes)+1] = {
+        'texto_origem': texto_origem,
+        'texto_final': texto_final,
+        'metodo_utilizado': tipo,
+        'shift_utilizado': shift
+    }
+
+def mostrar_historico():
+    print('\n\n-----Histórico de operações:')
+    for operacao in operacoes:
+        print('-------------------------------------------------------------')
+        print(f" Texto de origem: {operacoes[operacao]['texto_origem']}")
+        print(f"Texto resultante: {operacoes[operacao]['texto_final']}")
+        print(f"Metodo utilizado: {operacoes[operacao]['metodo_utilizado']}")
+
+        if(operacoes[operacao]['metodo_utilizado'] == 'bruteforce'):
+            print(f"Shifts utilizado: {operacoes[operacao]['shift_utilizado']}")
+        else:
+            print(f" Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
+        print('-------------------------------------------------------------\n')
 
 escolha_menu = menu()
 
@@ -111,7 +142,7 @@ while escolha_menu != 4:
         testar_tamanho_string(texto_criptografado)
 
         valor_shift = int(input('Digite o valor utilizado para shift: '))
-        texto_descriptografado = descriptografar(texto_criptografado,valor_shift)
+        texto_descriptografado = descriptografar(texto_criptografado,valor_shift, False)
 
         print('\n--------------------------------------------')
         print (f'Texto criptografado: {texto_criptografado}')
@@ -126,5 +157,6 @@ while escolha_menu != 4:
         bruteforce(texto_criptografado, descriptografar)
 
     escolha_menu = menu()
-
+    
+mostrar_historico()
 print('\nObrigado por utilizar!\n')
