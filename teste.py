@@ -1,23 +1,22 @@
-#Uma pequena adaptação da Cifra de César utilizando o endereço de caracteres UNICODE
 operacoes = {}
 
 def criptografar(texto, shift):
     texto_criptografado = ''
 
-    #criptografa todos os caracteres UNICODE com edereço de 32 a 126 e 160 a 255
     for caractere in texto:
         caractere_com_shift = ord(caractere) + shift #faz um shift no caractere atual
 
         #cria a string com o texto criptografado, concatenando o caractere atual na variavel texto_criptografado a cada iteração do for
         if ord(caractere) >= 32 and ord(caractere) <= 126:
             if caractere_com_shift > 126:
-                #caso o caractere com shift ultrapasse o limite de 126, ele será subtraido para ser substituido por um caractere dentro dos limites,
+                #caso o caractere com shift ultrapasse o limite de 126, ele será subtraido para ser substituido por um caractere dentro dos limites
                 #concatenando-o logo em seguida a variável texto_criptografado
                 texto_criptografado += chr(caractere_com_shift - 95)
             else:
                 #concatena o caractere a variável texto_criptografado, caso ele esteja dentro dos limites
                 texto_criptografado += chr(caractere_com_shift)
 
+        #criptografa todos os caracteres com endereço de 160 a 255 na tabela UNICODE
         if ord(caractere) >= 160 and ord(caractere) <= 255:
             if caractere_com_shift > 255:
                 texto_criptografado += chr(caractere_com_shift - 96)
@@ -31,25 +30,25 @@ def criptografar(texto, shift):
 def descriptografar(texto, shift, bruteforcing):
     texto_descriptografado = ''
 
-    #descriptografa todos os caracteres UNICODE com edereço de 32 a 126 e 160 a 255
     for caractere in texto:
         caractere_sem_shift = ord(caractere) - shift #faz um shift no caractere atual
+        #descriptografa todos os caracteres com edereço de 32 a 126 na tabela UNICODE
         if ord(caractere) >= 32 and ord(caractere) <= 126:
             if caractere_sem_shift < 32:
                 texto_descriptografado += chr(caractere_sem_shift + 95)
             else:
                 texto_descriptografado += chr(caractere_sem_shift)
 
+        #descriptografa todos os caracteres com edereço de 160 a 255 na tabela UNICODE
         if ord(caractere) >= 160 and ord(caractere) <= 255:
             if caractere_sem_shift < 160:
                 texto_descriptografado += chr(caractere_sem_shift + 95)
             else:
                 texto_descriptografado += chr(caractere_sem_shift)
-
-    #checa se a função não foi chamada pela função bruteforce, assim evitando criar múltiplos registros iguais,
-    #devido ao for contido em bruteforce que invoca a função descriptografar múltiplas vezes  
+        
     if not bruteforcing:
         registrar_operacao(texto, texto_descriptografado, 'descriptografia', shift)
+
 
     return texto_descriptografado
 
@@ -105,19 +104,18 @@ def registrar_operacao(texto_origem, texto_final, tipo, shift):
         'shift_utilizado': shift
     }
 
-#ao fim mostra histórico de operações de criptografia, descriptografia e bruteforce realizados durante a execução
 def mostrar_historico():
     print('\n\n-----Histórico de operações:')
     for operacao in operacoes:
         print('-------------------------------------------------------------')
-        print(f"  Texto de origem: {operacoes[operacao]['texto_origem']}")
-        print(f" Texto resultante: {operacoes[operacao]['texto_final']}")
-        print(f" Metodo utilizado: {operacoes[operacao]['metodo_utilizado']}")
+        print(f" Texto de origem: {operacoes[operacao]['texto_origem']}")
+        print(f"Texto resultante: {operacoes[operacao]['texto_final']}")
+        print(f"Metodo utilizado: {operacoes[operacao]['metodo_utilizado']}")
 
         if(operacoes[operacao]['metodo_utilizado'] == 'bruteforce'):
-            print(f"Shifts utilizados: {operacoes[operacao]['shift_utilizado']}")
+            print(f"Shifts utilizado: {operacoes[operacao]['shift_utilizado']}")
         else:
-            print(f"Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
+            print(f" Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
         print('-------------------------------------------------------------\n')
 
 escolha_menu = menu()
