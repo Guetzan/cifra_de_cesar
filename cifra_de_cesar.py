@@ -54,7 +54,7 @@ def descriptografar(texto, shift, bruteforcing):
     return texto_descriptografado
 
 #realiza um bruteforce em uma string, testando shift por shift (de 5 em 5) a cada iteração do for.
-def bruteforce(texto, funcao_descriptografar):
+def bruteforce(texto):
     shift_inicial = 1
     quantidades_de_shift = 6 #quantidades de shift a serem realizados no bruteforce, ou seja, inicialmente irá realizar um bruteforce começando de um shift de 1 a 5
     bruteforcing = True
@@ -117,7 +117,7 @@ def mostrar_historico():
         if(operacoes[operacao]['metodo_utilizado'] == 'bruteforce'):
             print(f"Shifts utilizados: {operacoes[operacao]['shift_utilizado']}")
         else:
-            print(f"Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
+            print(f"  Shift utilizado: {operacoes[operacao]['shift_utilizado']}")
         print('-------------------------------------------------------------\n')
 
 escolha_menu = menu()
@@ -156,7 +156,7 @@ while escolha_menu != 4:
 
         testar_tamanho_string(texto_criptografado)
 
-        bruteforce(texto_criptografado, descriptografar)
+        bruteforce(texto_criptografado)
 
     escolha_menu = menu()
     
