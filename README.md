@@ -3,7 +3,7 @@
 Este é um algoritmo que implementa uma adaptação simples da Cifra de César, capaz de realizar criptografia, descriptografia e ataques de força bruta (brute force) em uma string com até 128 caracteres.
 
 
-### Breve explicação sobre o como funciona a criptografia
+### Breve explicação sobre como funciona a criptografia
 
 A substituição é realizada com base nos valores decimais de cada caractere no padrão de codificação de caracteres UNICODE. Para isso, utilizamos os caracteres que estão nos endereços de 92 a 126, classificados como "Latino Básico", que incluem todas as letras de A a Z, números de 0 a 9 e algumas pontuações e símbolos essenciais. Também usamos os caracteres de 160 a 255, classificados como "Suplemento Latino-1", onde se encontram alguns caracteres muito importantes para a língua portuguesa, como Ç, Õ, Ã, entre outros.
 
